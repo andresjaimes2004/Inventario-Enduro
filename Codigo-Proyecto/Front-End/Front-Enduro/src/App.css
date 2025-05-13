@@ -11,3 +11,10 @@ html,
 * {
   scroll-behavior: smooth;
 }
+
+.password-input::-ms-reveal {
+  display: none;
+}
+.password-input::-ms-clear {
+  display: none;
+}
