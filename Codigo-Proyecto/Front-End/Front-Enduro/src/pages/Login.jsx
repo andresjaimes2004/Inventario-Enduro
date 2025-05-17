@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
@@ -8,19 +9,27 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
+  };
   return (
     <>
       <header className="w-full">
         <nav className="bg-[#FF7700]">
-          <div className="flex w-full px-[30px] h-[80px] items-center justify-start max-md:justify-center">
+          <div className="flex w-full px-4 h-[80px] items-center justify-start max-md:justify-center">
             <img
               src="src/assets/Logo.png"
               alt="Logo Enduro"
-              className="w-[120px] h-[77.38px]"
+              className="w-[100px] md:w-[120px] h-auto mt-0"
             />
           </div>
         </nav>
       </header>
+      {/* Login */}
       <section className="flex items-center justify-center px-4 h-[88vh] 2xl:h-[88vh]">
         <div
           className="flex w-[820px] h-[400px] max-md:w-full max-md:h-[90%] justify-center items-center
@@ -60,8 +69,11 @@ const Login = () => {
                   </button>
                 )}
               </div>
-              <button className="bg-[#FF7700] cursor-pointer text-white items-center justify-center mt-6 w-full h-[45px] rounded-2xl flex">
-                <a href="#">I N G R E S A R</a>
+              <button
+                className="bg-[#FF7700] cursor-pointer text-white items-center justify-center mt-6 w-full h-[45px] rounded-2xl flex"
+                onClick={handleLogin}
+              >
+                I N G R E S A R
               </button>
             </div>
           </div>
@@ -74,6 +86,7 @@ const Login = () => {
           </div>
         </div>
       </section>
+      {/* End Login */}
     </>
   );
 };
