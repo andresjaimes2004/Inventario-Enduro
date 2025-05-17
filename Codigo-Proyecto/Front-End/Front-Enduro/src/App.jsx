@@ -1,5 +1,5 @@
-import "./App.css";
-import Login from "./features/auth/pages/Login";
+import "./styles/App.css";
+import Login from "./pages/Login";
 function App() {
   return (
     <>
