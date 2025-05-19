@@ -1,8 +1,11 @@
 package com.enduro.inventario.Controller;
 
 import com.enduro.inventario.Model.Producto;
+import com.enduro.inventario.Model.ProductosConTallaDTO;
 import com.enduro.inventario.Service.ProductoService;
+import com.enduro.inventario.Service.ProductoTallaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,15 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private ProductoTallaService productoTallaService;
+
+    @PostMapping("/productos")
+    public ResponseEntity<String> crearProducto(@RequestBody ProductosConTallaDTO dto) {
+        productoService.saveProductoConTallas(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Producto creado correctamente");
+    }
+
     @GetMapping
     public ResponseEntity<List<Producto>> getAllProductos() {
         return ResponseEntity.ok(productoService.GetProductos());
@@ -29,34 +41,23 @@ public class ProductoController {
         return ResponseEntity.ok("Producto guardado con éxito.");
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> editProducto(
-            @PathVariable Integer id,
-            @RequestParam String nombreProducto,
-            @RequestParam String imagen,
-            @RequestParam String talla,
-            @RequestParam Integer cantidad,
-            @RequestParam BigDecimal precio,
-            @RequestParam String estado) {
 
-        boolean updated = productoService.editProducto(id, nombreProducto, imagen, talla, cantidad, precio, estado);
+    @PutMapping("/editar")
+    public ResponseEntity<String> editProducto(@RequestBody Producto producto) {
 
-        if (updated) {
-            return ResponseEntity.ok("Producto actualizado con éxito.");
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            productoService.editProducto(producto);
+            return ResponseEntity.ok("Producto editado exitosamente.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error al editar el producto: " + e.getMessage());
         }
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteProducto(
-            @RequestParam String nombreProducto,
-            @RequestParam String talla) {
-
-        boolean deleted = productoService.deleteProducto(nombreProducto, talla);
-
-        if (deleted) {
-            return ResponseEntity.ok("Producto eliminado.");
+    public ResponseEntity<String> deleteProducto(@RequestBody Producto producto) {
+        boolean eliminado = productoService.deleteProducto(producto);
+        if (eliminado) {
+            return ResponseEntity.ok("Producto eliminado correctamente.");
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -72,8 +73,4 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.findByNombreProductoContaining(nombreProducto));
     }
 
-    @GetMapping("/talla/{talla}")
-    public ResponseEntity<Optional<Producto>> findByTalla(@PathVariable String talla) {
-        return ResponseEntity.ok(productoService.findByTalla(talla));
-    }
 }
