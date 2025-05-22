@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    navigate("/Inicio");
   };
   return (
     <>
