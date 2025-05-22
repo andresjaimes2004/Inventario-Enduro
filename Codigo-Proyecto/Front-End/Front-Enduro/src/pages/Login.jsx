@@ -33,7 +33,7 @@ const Login = () => {
       <section className="flex items-center justify-center px-4 h-[88vh] 2xl:h-[88vh]">
         <div
           className="flex w-[820px] h-[400px] max-md:w-full max-md:h-[90%] justify-center items-center
-             bg-[#AFCBD3] rounded-[20px] gap-5 p-20 max-md:!flex-col max-md:p-10 max-sm:items-start max-sm:gap-2"
+            bg-[#AFCBD3] rounded-[20px] gap-5 p-20 max-md:!flex-col max-md:p-10 max-sm:items-start max-sm:gap-2"
         >
           <div className="flex flex-col w-[50%] justify-center items-center gap-10 max-md:w-full">
             <div className="flex flex-col justify-center items-center gap-4 max-md:w-full">
