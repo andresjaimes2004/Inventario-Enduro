@@ -1,6 +1,7 @@
 package com.enduro.inventario.Service;
 
 import com.enduro.inventario.Model.Producto;
+import com.enduro.inventario.Model.ProductosConTallaDTO;
 import com.enduro.inventario.Model.Talla;
 
 import java.math.BigDecimal;
@@ -13,14 +14,14 @@ public interface ProductoService {
 
     public void saveProducto(Producto producto);
 
-    public boolean editProducto(Integer id, String nombreProducto, String imagen, String Talla, Integer cantidad, BigDecimal precio, String estado);
+    public void editProducto(Producto producto);
 
-    public boolean deleteProducto(String nombreProducto, String talla);
+    public boolean deleteProducto(Producto producto);
 
     public Optional<Producto> findByNombreProductoContaining(String nombreProducto);
 
     public Optional<Producto> findByNombreProducto (String nombreProducto);
 
-    public Optional<Producto> findByTalla(String talla);
+    public void saveProductoConTallas(ProductosConTallaDTO DTO);
 
 }

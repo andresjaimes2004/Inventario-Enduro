@@ -1,15 +1,13 @@
 package com.enduro.inventario.Service;
 
-import com.enduro.inventario.Model.Estado;
-import com.enduro.inventario.Model.Producto;
-import com.enduro.inventario.Model.Talla;
+import com.enduro.inventario.Model.*;
 import com.enduro.inventario.Repository.EstadoRepository;
 import com.enduro.inventario.Repository.ProductoRepository;
+import com.enduro.inventario.Repository.ProductoTallaRepository;
 import com.enduro.inventario.Repository.TallaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +23,9 @@ public class ProductoServiceImpl implements ProductoService {
     @Autowired
     private TallaRepository tallaRepository;
 
+    @Autowired
+    private ProductoTallaRepository productoTallaRepository;
+
     @Override
     public List<Producto> GetProductos() {
         return productoRepository.findAll();
@@ -33,51 +34,27 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public void saveProducto(Producto producto) {
 
-        productoRepository.save(producto);
+        Producto producto1=new Producto(producto.getNombreProducto(), producto.getImagenProducto(), producto.getPrecio(), producto.getEstado());
+        productoRepository.save(producto1);
 
     }
 
     @Override
-    public boolean editProducto(Integer id, String nombreProducto, String imagen, String Talla, Integer cantidad, BigDecimal precio, String estado) {
-
-        Optional<Talla> tallaOptional=tallaRepository.findByNTalla(Talla);
-        Talla tallaProv=tallaOptional.get();
-
-        Optional<Producto> productoOptional=productoRepository.findByIdProductoAndTalla(id,tallaProv);
-
-        if (productoOptional.isPresent()){
-
-            Producto producto=productoOptional.get();
-
-            producto.setNombreProducto(nombreProducto);
-            producto.setImagen(imagen);
-            producto.setTalla(tallaProv);
-            producto.setCantidad(cantidad);
-            producto.setPrecio(precio);
-
-            return true;
-        }
-
-        return false;
+    public void editProducto(Producto producto) {
+        this.saveProducto(producto);
     }
 
     @Override
-    public boolean deleteProducto(String nombreProducto, String talla) {
-        Optional<Producto> productoOptional=productoRepository.findByNombreProducto(nombreProducto);
-        Optional<Estado> estadoOptional=estadoRepository.findByNombreEstado("Eliminado");
-        Optional<Talla> tallaOptional=tallaRepository.findByNTalla(talla);
-
-        if (productoOptional.isPresent() && estadoOptional.isPresent() && tallaOptional.isPresent()){
-
-            Producto producto=productoOptional.get();
+    public boolean deleteProducto(Producto producto) {
+        Optional<Estado> estadoOptional=estadoRepository.findByNombreEstado("Inactivo");
+        if(estadoOptional.isPresent()){
             producto.setEstado(estadoOptional.get());
-            productoRepository.save(producto);
+            this.saveProducto(producto);
             return true;
-
         }
-
         return false;
     }
+
 
     @Override
     public Optional<Producto> findByNombreProductoContaining(String nombreProducto) {
@@ -90,15 +67,33 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Optional<Producto> findByTalla(String talla) {
+    public void saveProductoConTallas(ProductosConTallaDTO DTO) {
 
-        Optional<Talla> tallaOptional=tallaRepository.findByNTalla(talla);
-        if (tallaOptional.isPresent()){
-            Talla tallaProv=tallaOptional.get();
-            return productoRepository.findByTalla(tallaProv);
+        Optional<Estado> estadoOptional=estadoRepository.findByNombreEstado("Activo");
+        Estado estado = estadoOptional.get();
+
+        Producto producto = new Producto();
+        producto.setNombreProducto(DTO.getNombreProducto());
+        producto.setImagenProducto(DTO.getImagenProducto());
+        producto.setPrecio(DTO.getPrecio());
+        producto.setEstado(estado);
+
+        productoRepository.save(producto);
+
+        for (TallaCantidadDTO tallaDto : DTO.getTallas()) {
+
+            Talla talla = tallaRepository.findByTalla(tallaDto.getNumeroTalla());
+
+            ProductoTalla productoTalla=new ProductoTalla();
+            productoTalla.setProducto(producto);
+            productoTalla.setTalla(talla);
+            productoTalla.setStock(tallaDto.getCantidad());
+            productoTalla.setEstado(estado);
+            productoTallaRepository.save(productoTalla);
 
         }
 
-        return null;
     }
+
+
 }
