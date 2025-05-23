@@ -3,6 +3,7 @@ import { Link, useLocation, Navigate, Routes, Route } from "react-router-dom";
 import Inicio from "../components/Inicio";
 import Productos from "../components/Productos";
 import Movimientos from "../components/Movimientos";
+import CrearProducto from "../components/CrearProducto";
 import {
   MdMenu,
   MdMenuOpen,
@@ -91,6 +92,7 @@ const DashBoard = () => {
             <Route path="/Inicio" element={<Inicio />} />
             <Route path="/Productos" element={<Productos />} />
             <Route path="/Movimientos" element={<Movimientos />} />
+            <Route path="/CrearProducto" element={<CrearProducto />} />
           </Routes>
         </main>
         {/* Main Content End*/}

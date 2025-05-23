@@ -8,7 +8,10 @@ const Inicio = () => {
     <div className="w-full md:min-h-screen flex items-center justify-center px-2 py-8">
       <div className="w-full max-w-5xl mx-auto flex flex-col gap-2">
         {/* Primer div: ancho completo */}
-        <div className="w-full flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[200px] md:min-h-[300px] items-center justify-center">
+        <div
+          className="w-full flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[200px] md:min-h-[300px] 
+        items-center justify-center"
+        >
           <div className="w-1/2 flex items-center justify-center">
             <img
               src="src/assets/homestock.webp"
@@ -32,7 +35,8 @@ const Inicio = () => {
         <div className="w-full flex flex-col md:flex-row gap-2">
           {/* Segundo div */}
           <div
-            className="flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[140px] md:min-h-[280px] w-full md:w-1/2 items-center p-4 md:p-2 cursor-pointer hover:shadow-lg transition-shadow"
+            className="flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[140px] md:min-h-[280px] 
+            w-full md:w-1/2 items-center p-4 md:p-2 cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/Productos")}
           >
             <div className="w-1/2 flex items-center justify-center">
@@ -54,7 +58,8 @@ const Inicio = () => {
           </div>
           {/* Tercer div */}
           <div
-            className="flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[140px] md:min-h-[280px] w-full md:w-1/2 items-center p-4 md:p-2 cursor-pointer hover:shadow-lg transition-shadow"
+            className="flex md:flex-row bg-[#AFCBD3] rounded-xl shadow-md min-h-[140px] md:min-h-[280px] 
+            w-full md:w-1/2 items-center p-4 md:p-2 cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/Movimientos")}
           >
             <div className="w-1/2 flex items-center justify-center">
