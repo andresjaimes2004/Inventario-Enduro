@@ -23,6 +23,6 @@ public interface UsuarioService {
 
     public List<Usuario> findByEstado(String estado);
 
-    public boolean logIn(String NickName, String contraseña);
+    public boolean logIn(String NickName, String contrasena);
 
 }

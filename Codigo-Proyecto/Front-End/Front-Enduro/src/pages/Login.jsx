@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -20,7 +21,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     let valid = true;
 
@@ -41,6 +42,16 @@ const Login = () => {
     if (!valid) return;
 
     navigate("/Inicio");
+    // try {
+    //   const result = await login(username, password);
+    //   if (result === true || result === "true") {
+    //     navigate("/Inicio");
+    //   } else {
+    //     alert("Usuario o contraseña incorrectos.");
+    //   }
+    // } catch (error) {
+    //   alert("Error al conectar con el servidor.");
+    // }
   };
 
   return (

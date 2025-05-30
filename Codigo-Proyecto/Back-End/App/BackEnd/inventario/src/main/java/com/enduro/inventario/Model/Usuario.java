@@ -30,8 +30,8 @@ public class Usuario {
     @Column(name = "nick_usuario", nullable = false, unique = true, length = 50)
     private String nickUsuario;
 
-    @Column(name = "contraseña_usuario", nullable = false, length = 60)
-    private String contraseñaUsuario;
+    @Column(name = "contrasena_usuario", nullable = false, length = 60)
+    private String contrasenaUsuario;
 
     @Column(name = "correo_usuario", nullable = false, unique = true, length = 60)
     private String correoUsuario;

@@ -69,14 +69,12 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public boolean logIn(String NickName, String contraseña) {
-
-        Optional<Usuario> usuarioOptional=usuarioRepository.findByNickUsuario(NickName);
-        Usuario usuarioProv=usuarioOptional.get();
-        if (usuarioProv.getContraseñaUsuario().equals(contraseña)){
-            return true;
+    public boolean logIn(String NickName, String contrasena) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByNickUsuario(NickName);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuarioProv = usuarioOptional.get();
+            return usuarioProv.getContrasenaUsuario().equals(contrasena);
         }
-
         return false;
     }
 }

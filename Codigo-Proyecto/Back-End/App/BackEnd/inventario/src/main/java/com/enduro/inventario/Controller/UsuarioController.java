@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -28,9 +28,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/Login")
-    public boolean Login(@RequestParam String Nickname,@RequestParam String contraseña){
+    public boolean Login(@RequestParam String Nickname,@RequestParam String contrasena){
 
-        return usuarioService.logIn(Nickname,contraseña);
+        return usuarioService.logIn(Nickname,contrasena);
     }
 
     @DeleteMapping("/eliminar")
