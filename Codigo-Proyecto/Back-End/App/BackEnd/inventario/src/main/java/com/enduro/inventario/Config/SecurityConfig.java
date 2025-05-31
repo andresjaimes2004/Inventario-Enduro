@@ -17,19 +17,17 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    public class SecurityConfig {
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http
-                    .csrf(AbstractHttpConfigurer::disable) // Deshabilitar CSRF para simplificar la configuración
-                    .cors().and() // Habilitar CORS si es necesario
-                    .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Usar sesiones sin estado
-                    .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/inventario/api/**").permitAll()
-                            .anyRequest().permitAll());
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable) // Deshabilitar CSRF para simplificar la configuración
+                .cors().and() // Habilitar CORS si es necesario
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Usar sesiones sin estado
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/inventario/api/**").permitAll()
+                        .anyRequest().permitAll());
 
-            return http.build();
-        }
+        return http.build();
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
