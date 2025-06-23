@@ -16,8 +16,8 @@ const Inicio = () => {
             <img
               src="src/assets/homestock.webp"
               alt="Imagen principal"
-              className="flex-shrink-0 w-[120px] h-[120px] md:w-[300px] md:h-auto object-contain "
-              style={{ maxWidth: "30vw", maxHeight: "30vw" }}
+              className="flex-shrink-0 w-[150px] h-[150px] md:w-[300px] md:h-auto object-contain "
+              // style={{ maxWidth: "30vw", maxHeight: "30vw" }}
             />
           </div>
           <div className="w-1/2 flex-1 min-w-0 px-2 md:px-4 text-center">

@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .cors().and() // Habilitar CORS si es necesario
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Usar sesiones sin estado
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/inventario/api/**").permitAll()
+                        //.requestMatchers("/usuarios/**").permitAll()
                         .anyRequest().permitAll());
 
         return http.build();

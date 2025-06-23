@@ -16,6 +16,7 @@ public class ProductoTalla {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id_producto_talla", nullable = false)
     private Integer idProductotalla;
 
     @ManyToOne
