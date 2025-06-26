@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Movimientos = () => {
   // Estado para manejar la búsqueda
@@ -83,9 +84,11 @@ const Movimientos = () => {
     setMovimientos((prev) => [...prev, { ...newMovement, id: Date.now() }]);
   };
 
+  const navigate = useNavigate();
+
   const createMovement = (e) => {
     e.preventDefault();
-    navigate("/AñadirMovimiento");
+    navigate("/AnadirMovimiento");
   };
 
   // Filtrar movimientos basado en la búsqueda

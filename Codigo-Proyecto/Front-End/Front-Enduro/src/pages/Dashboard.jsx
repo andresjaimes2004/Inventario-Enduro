@@ -117,7 +117,7 @@ import Productos from "../components/Productos";
 import Movimientos from "../components/Movimientos";
 import CrearProducto from "../components/CrearProducto";
 import EditarProducto from "../components/EditarProducto";
-import AnadirMovimiento from "../components/AñadirMovimiento";
+import AnadirMovimiento from "../components/AnadirMovimiento";
 import {
   MdMenu,
   MdMenuOpen,
@@ -209,7 +209,7 @@ const DashBoard = () => {
             <Route path="/Movimientos" element={<Movimientos />} />
             <Route path="/CrearProducto" element={<CrearProducto />} />
             <Route path="/EditarProducto/:id" element={<EditarProducto />} />
-            <Route path="/AñadirMovimiento" element={<AnadirMovimiento />} />
+            <Route path="/AnadirMovimiento" element={<AnadirMovimiento />} />
           </Routes>
         </main>
         {/* Main Content End*/}
